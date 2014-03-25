@@ -1,12 +1,16 @@
 var path = require('path')
   , symlink = require('./lib/symlink')()
+  , restart = require('navy-clock-restart')()
 
 module.exports = function clockInstall() {
 
   var steps =
-  { init: init
-  , symlink: symlink
-  }
+      { init: init
+      , symlink: symlink
+      }
+  , restartSteps = restart.getSteps()
+
+  steps.restart = restartSteps.restart
 
   function getSteps() {
     return steps
@@ -20,6 +24,7 @@ module.exports = function clockInstall() {
     var data =
           { appVersion: context.orderArgs[0]
           , environment: context.orderArgs[1]
+          , services: context.appData.services
           }
       , baseName = context.appId + '-' + data.environment
       , buildDirName = baseName + '-' + data.appVersion
