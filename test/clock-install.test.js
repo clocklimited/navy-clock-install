@@ -23,7 +23,8 @@ describe('clock-install', function () {
     var steps = clockInstall.getSteps()
       , context =
         { appId: 'myapp'
-        , orderArgs: [ '1.0.0', 'staging' ]
+        , environment: 'staging'
+        , orderArgs: [ '1.0.0' ]
         , appData: { buildDir: '/tmp/build', services: [ 'admin' ] }
         }
 
@@ -31,13 +32,13 @@ describe('clock-install', function () {
       should.not.exist(error)
       Object.keys(data).length.should.equal(5)
       data.appVersion.should.equal(context.orderArgs[0])
-      data.environment.should.equal(context.orderArgs[1])
+      data.environment.should.equal(context.environment)
 
       var expectedBuildDir =
-        context.appData.buildDir + '/' + context.appId + '-' + context.orderArgs[1] + '-' + context.orderArgs[0]
+        context.appData.buildDir + '/' + context.appId + '-' + context.environment + '-' + context.orderArgs[0]
 
       data.buildDir.should.equal(expectedBuildDir)
-      data.finalDir.should.equal(context.appData.buildDir + '/' + context.appId + '-' + context.orderArgs[1])
+      data.finalDir.should.equal(context.appData.buildDir + '/' + context.appId + '-' + context.environment)
       data.services.length.should.equal(context.appData.services.length)
       done()
     })

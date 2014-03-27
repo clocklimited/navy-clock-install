@@ -23,7 +23,7 @@ module.exports = function clockInstall() {
   function init(context, callback) {
     var data =
           { appVersion: context.orderArgs[0]
-          , environment: context.orderArgs[1]
+          , environment: context.environment
           , services: context.appData.services
           }
       , baseName = context.appId + '-' + data.environment
