@@ -1,6 +1,6 @@
 var path = require('path')
   , symlink = require('./lib/symlink')()
-  , generateUpstart = require('./lib/generate-upstart')
+  , generateUpstart = require('./lib/generate-upstart')()
   , restart = require('navy-clock-restart')()
 
 module.exports = function clockInstall() {
