@@ -23,6 +23,7 @@ describe('generate-upstart', function () {
         { finalDir: '/tmp/my-app'
         , nodeVersion: '0.10.22'
         , environment: 'staging'
+        , client: 'testClient'
         , services:
           { site: 'site/app.js'
           , admin: 'admin/app.js'
@@ -39,7 +40,7 @@ describe('generate-upstart', function () {
       emitSpy.calledThrice.should.equal(true, 'emit called count incorrect')
 
       Object.keys(data.services).forEach(function (service) {
-        var upstartName = 'node-' + context.appId + '-' + data.environment + '-' + service + '.conf'
+        var upstartName = 'node-' + data.client + '-' + context.appId + '-' + data.environment + '-' + service + '.conf'
           , upstartPath = testDir + upstartName
 
         fs.existsSync(upstartPath).should.equal(true, upstartPath + ' does not exist')
