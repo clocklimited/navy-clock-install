@@ -1,7 +1,7 @@
 {
   "name": "navy-clock-install",
   "description": "Navy Order to install a Clock project for deployment",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git@github.com:clocklimited/navy-clock-install"
