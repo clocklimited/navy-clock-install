@@ -17,7 +17,8 @@
     "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage"
   },
   "dependencies": {
-    "async": "^0.2.10"
+    "async": "^0.2.10",
+    "navy-clock-restart": "^1.0.0"
   },
   "devDependencies": {
     "istanbul": "~0.2.3",
