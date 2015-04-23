@@ -28,9 +28,8 @@ module.exports = function clockInstall() {
           , environment: context.environment
           , services: context.appData.services
           , nodeVersion: context.appData.nodeVersion
-          , client: context.appData.client
           }
-      , baseName = data.client + '-' + context.appId + '-' + data.environment
+      , baseName = context.appId + '-' + data.environment
       , buildDirName = baseName + '-' + data.appVersion
       , buildDir = path.join(context.appData.buildDir, buildDirName)
       , finalDir = path.join(context.appData.buildDir, baseName)

@@ -27,24 +27,23 @@ describe('clock-install', function () {
         { appId: 'myapp'
         , environment: 'staging'
         , orderArgs: [ '1.0.0' ]
-        , appData: { client: 'testClient', buildDir: '/tmp/build', services: [ 'admin' ], nodeVersion: '0.10.22' }
+        , appData: { buildDir: '/tmp/build', services: [ 'admin' ], nodeVersion: '0.10.22' }
         }
 
     steps.init(context, function (error, data) {
       should.not.exist(error)
-      Object.keys(data).length.should.equal(7)
+      Object.keys(data).length.should.equal(6)
       data.appVersion.should.equal(context.orderArgs[0])
       data.environment.should.equal(context.environment)
 
       var expectedFinalDir = context.appData.buildDir + '/'
-            + context.appData.client + '-' + context.appId + '-' + context.environment
+            + context.appId + '-' + context.environment
         , expectedBuildDir = expectedFinalDir + '-' + context.orderArgs[0]
 
       data.buildDir.should.equal(expectedBuildDir)
       data.finalDir.should.equal(expectedFinalDir)
       data.services.length.should.equal(context.appData.services.length)
       data.nodeVersion.should.equal(context.appData.nodeVersion)
-      data.client.should.equal(context.appData.client)
       done()
     })
   })
