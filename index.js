@@ -28,6 +28,7 @@ module.exports = function clockInstall() {
           , environment: context.environment
           , services: context.appData.services
           , nodeVersion: context.appData.nodeVersion
+          , customEnvVars: context.appData.env
           }
       , baseName = context.appId + '-' + data.environment
       , buildDirName = baseName + '-' + data.appVersion

@@ -27,12 +27,17 @@ describe('clock-install', function () {
         { appId: 'myapp'
         , environment: 'staging'
         , orderArgs: [ '1.0.0' ]
-        , appData: { buildDir: '/tmp/build', services: [ 'admin' ], nodeVersion: '0.10.22' }
+        , appData:
+          { buildDir: '/tmp/build'
+          , services: [ 'admin' ]
+          , nodeVersion: '0.10.22'
+          , env: { CUSTOM_ENV: 'test' }
+          }
         }
 
     steps.init(context, function (error, data) {
       should.not.exist(error)
-      Object.keys(data).length.should.equal(6)
+      Object.keys(data).length.should.equal(7)
       data.appVersion.should.equal(context.orderArgs[0])
       data.environment.should.equal(context.environment)
 
@@ -44,6 +49,7 @@ describe('clock-install', function () {
       data.finalDir.should.equal(expectedFinalDir)
       data.services.length.should.equal(context.appData.services.length)
       data.nodeVersion.should.equal(context.appData.nodeVersion)
+      data.customEnvVars.CUSTOM_ENV.should.equal(context.appData.env.CUSTOM_ENV)
       done()
     })
   })

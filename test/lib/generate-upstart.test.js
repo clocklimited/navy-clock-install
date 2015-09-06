@@ -16,7 +16,7 @@ describe('generate-upstart', function () {
     })
   })
 
-  it('should generate upstart jobs', function (done) {
+  function runTest(customEnvVars, callback) {
     var emitSpy = sinon.spy()
       , context = { emit: emitSpy, appId: 'testAppId' }
       , data =
@@ -28,6 +28,7 @@ describe('generate-upstart', function () {
           , admin: 'admin/app.js'
           , api: 'api/app.js'
           }
+        , customEnvVars: customEnvVars
         }
 
     createGenerateUpstart.__set__('upstartLocation', testDir)
@@ -46,8 +47,21 @@ describe('generate-upstart', function () {
         fs.readFileSync(upstartPath).toString().should.equal(generateFixture(service, context, data))
       })
 
-      done()
+      callback()
     })
+  }
+
+  it('should generate upstart jobs', function (done) {
+    var customEnvVars =
+        { TEST_ENV: 'hi'
+        , TEST_ENV_TWO: 'hi2'
+        }
+    runTest(customEnvVars, done)
+  })
+
+  it('should not error when no custom env vars present', function (done) {
+    var customEnvVars = null
+    runTest(customEnvVars, done)
   })
 
   after(function (done) {
