@@ -9,6 +9,7 @@ module.exports = function clockInstall() {
       , symlink: symlink
       , generateUpstart: generateUpstart
       , restart: function (context, data, callback) {
+          if (!context.isMaster) return callback()
           context.executeOrder('restart', [], function () {
             callback()
           })
